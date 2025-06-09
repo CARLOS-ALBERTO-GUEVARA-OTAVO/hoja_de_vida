@@ -10,3 +10,5 @@ const Education = () => {
     </section>
   );
 };
+
+export default Education;

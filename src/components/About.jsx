@@ -1,21 +1,13 @@
 import React from 'react';
-import imagenPerfil from '../../public/imagen_hoja_de_vida.png';
+import imagenPerfil from '../assets/imagen_hoja_de_vida.png';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function About() {
   return (
     <div className="about-container">
-      <header className="header">
-        <div className="logo">CAC <span>Cesar Adrian Camargo</span></div>
-        <nav className="nav-links">
-          <a href="#inicio">Inicio</a>
-          <a href="#sobre-mi">Sobre mí</a>
-          <a href="#proyectos">Proyectos</a>
-          <a href="#conocimientos">Conocimientos</a>
-          <a href="#contacto">Contacto</a>
-        </nav>
-      </header>
       
-      <main className="main-content">
+      
+      <main className="main-content" id="sobre-mi">
         <div className="profile-container">
           <div className="profile-image-wrapper">
             <img src={imagenPerfil} alt="Foto de perfil" className="profile-pic" />
@@ -23,7 +15,7 @@ function About() {
           </div>
           
           <div className="profile-info">
-            <h1>Cesar Adrian Camargo Rodriguez</h1>
+            <h1>Carlos Alberto Guevara Otavo</h1>
             <p className="title">Desarrollador Web Full Stack</p>
             
             <div className="divider"></div>
@@ -48,7 +40,7 @@ function About() {
                 <i className="bi bi-envelope"></i>
               </a>
             </div>
-          </div>
+          </div>  
         </div>
       </main>
     </div>
