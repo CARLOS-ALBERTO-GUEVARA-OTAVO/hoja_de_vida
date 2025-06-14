@@ -8,7 +8,16 @@ import Skills from './components/Skills';
 import Portfolio from './components/Portfolio';
 import Contact from './components/Contact';
 import Download from './components/Download';
-import './App.css'; // O './styles-complete.css' si usas ese archivo
+import './App.css';
+import './components/About.css';
+import './components/Sobre_mi.css';
+import './components/Education.css';
+import './components/Experience.css';
+import './components/Skills.css';
+import './components/Portfolio.css';
+import './components/Contact.css';
+import './components/Download.css';
+import './components/Header.css';
 
 function App() {
   return (
@@ -16,19 +25,20 @@ function App() {
       <Header />
       <main>
         <section id="inicio" className="hero-section">
-          {/* Puedes agregar un hero banner aquí */}
+          <About />
         </section>
-        <About />
-        <Sobre_mi />
-        <Education />
-        <Experience />
-        <Skills />
-        <Portfolio />
-        <Contact />
+        <div id="cv-content">
+          <Sobre_mi />
+          <Education />
+          <Experience />
+          <Skills />
+          <Portfolio />
+          <Contact />
+        </div>
         <Download />
       </main>
       <footer>
-        {/* Pie de página */}
+        <p>© 2025 Carlos Alberto Guevara Otavo. Todos los derechos reservados.</p>
       </footer>
     </div>
   );

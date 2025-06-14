@@ -1,0 +1,59 @@
+.hero-section {
+  text-align: center;
+  padding: 6.5rem 5% 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 80%;
+  height: 200%;
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.05), rgba(212, 160, 23, 0.05));
+  transform: rotate(15deg);
+  z-index: -1;
+}
+
+.btn-learn-more {
+  display: inline-block;
+  padding: 1.25rem 2.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: var(--lighter);
+  text-decoration: none;
+  border-radius: 50px;
+  margin-top: 2rem;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 10px 20px var(--shadow-primary);
+}
+
+.btn-learn-more:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px var(--shadow-primary);
+}
+
+.btn-learn-more::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-learn-more:hover::before {
+  left: 100%;
+}

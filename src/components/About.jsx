@@ -22,8 +22,8 @@ function About() {
             
             <div className="info-section">
               <p><i className="bi bi-geo-alt"></i> Ibagué, Tolima - Colombia</p>
-              <p><i className="bi bi-envelope"></i> adriancamargo69@gmail.com</p>
-              <p><i className="bi bi-phone"></i> +57 310 857 1293</p>
+              <p><i className="bi bi-envelope"></i> Carlosgo1822@gmail.com</p>
+              <p><i className="bi bi-phone"></i> +57 313 810 2150</p>
             </div>
             
             <div className="social-links">
