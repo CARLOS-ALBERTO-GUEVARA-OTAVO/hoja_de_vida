@@ -1,4 +1,5 @@
 import React from 'react';
+import './Sobre_mi.css'; // Importamos los estilos de la tarjeta
 
 const Skills = () => {
   // Lista de habilidades con nombre, ícono (Font Awesome) y nivel
@@ -16,30 +17,31 @@ const Skills = () => {
   ];
 
   return (
-    <section id="habilidades" className="section skills-section">
-      <h2 className="section-title">Habilidades</h2>
-      <div className="skills-grid">
-        {skills.length > 0 ? (
-          <>
-            {skills.map((skill, index) => (
-              <div
-                key={index}
-                className="skill-card"
-                data-aos="fade-up"
-                data-aos-delay={index * 100}
-                style={{ border: '1px solid red' }} // Depuración: borde rojo para ver si las tarjetas se renderizan
-              >
-                <div className="skill-icon">
-                  <i className={skill.icon} />
+    <section id="habilidades" className="about-section">
+      <div className="profile-container">
+        <div className="profile-info" style={{ textAlign: 'center' }}>
+          <h1>Habilidades</h1>
+          <div className="divider" style={{ margin: '2rem auto' }}></div>
+          <div className="info-section">
+            {/* El div skills-grid necesita sus propios estilos para mostrarse como una cuadrícula */}
+            <div className="skills-grid">
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="skill-card"
+                  data-aos="fade-up"
+                  data-aos-delay={index * 100}
+                >
+                  <div className="skill-icon">
+                    <i className={skill.icon} />
+                  </div>
+                  <h4 className="skill-name">{skill.name}</h4>
+                  <div className="skill-level">{skill.level}%</div>
                 </div>
-                <h4 className="skill-name">{skill.name}</h4>
-                <div className="skill-level">{skill.level}%</div>
-              </div>
-            ))}
-          </>
-        ) : (
-          <p style={{ color: 'red' }}>Error: No skills data or rendering issue.</p>
-        )}
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

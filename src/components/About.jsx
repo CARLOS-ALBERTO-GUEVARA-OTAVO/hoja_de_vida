@@ -1,53 +1,47 @@
 import React from 'react';
 import imagenPerfil from '../assets/desarrollador.jpeg';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import TextReveal from '@/components/magicui/text-reveal';
-
+import './Sobre_mi.css'; // Usamos el CSS que tiene el estilo de tarjeta
+import ASCIIText from './ASCIIText'; // 1. Importamos el nuevo componente
 
 function About() {
   return (
-    <div className="p-4 md:p-8"> {/* Usando clases de Tailwind para el padding */}
-      
-      
-      <main id="sobre-mi">
-        <div className="flex flex-col md:flex-row items-center gap-8"> {/* Contenedor flexible con Tailwind */}
-          <div className="relative">
-            <img src={imagenPerfil} alt="Foto de perfil" className="w-48 h-48 rounded-full object-cover shadow-lg" />
-            <div className="absolute inset-0 rounded-full border-4 border-gray-300"></div>
-          </div>
-          
-          <div>
-            <div className="text-4xl font-bold text-gray-800">
-              <TextReveal text="Carlos Alberto Guevara Otavo" />
-            </div>
-            <p className="text-xl text-gray-600 mt-2">Desarrollador Web Full Stack</p>
-            
-            <div className="my-4 border-b border-gray-300"></div>
-            
-            <div className="space-y-2 text-gray-700">
-              <p className="flex items-center gap-2"><i className="bi bi-geo-alt"></i> Ibagué, Tolima - Colombia</p>
-              <p className="flex items-center gap-2"><i className="bi bi-envelope"></i> Carlosgo1822@gmail.com</p>
-              <p className="flex items-center gap-2"><i className="bi bi-phone"></i> +57 313 810 2150</p>
-            </div>
-            
-            <div className="flex gap-4 mt-4 text-2xl">
-              <a href="https://github.com/caguevara" aria-label="GitHub" className="text-gray-700 hover:text-black">
-                <i className="bi bi-github"></i>
-              </a>
-              <a href="https://linkedin.com/in/carlos-guevara-dev" aria-label="LinkedIn" className="text-gray-700 hover:text-blue-700">
-                <i className="bi bi-linkedin"></i>
-              </a>
-              <a href="https://wa.me/573138102150" aria-label="WhatsApp" className="text-gray-700 hover:text-green-500">
-                <i className="bi bi-whatsapp"></i>
-              </a>
-              <a href="mailto:Carlosgo1822@gmail.com" aria-label="Email" className="text-gray-700 hover:text-red-500">
-                <i className="bi bi-envelope"></i>
-              </a>
-            </div>
-          </div>  
+    // Usamos la estructura que coincide con Sobre_mi.css
+    <section id="sobre-mi" className="about-section">
+      <div className="profile-container">
+        <div className="profile-image-wrapper">
+          <img src={imagenPerfil} alt="Foto de perfil de Carlos Guevara" className="profile-pic" />
+          <div className="image-overlay"></div>
         </div>
-      </main>
-    </div>
+        <div className="profile-info">
+          {/* 2. Creamos un contenedor para el efecto y lo llamamos */}
+          <div style={{ position: 'relative', height: '100px', marginBottom: '0.75rem' }}>
+            <ASCIIText 
+              text="Carlos Guevara"
+              textFontSize={150}
+              asciiFontSize={4}       /* Reducimos aún más para mayor definición */
+              textColor="var(--darker)" /* Mantenemos el color de alto contraste */
+            />
+          </div>
+          <p className="title">Desarrollador en Formación</p>
+          <div className="divider"></div>
+          <div className="info-section">
+            <p>
+              Apasionado por el desarrollo web y en formación como Tecnólogo en Análisis y Desarrollo de Software en el SENA. Me motiva aprender constantemente y aplicar lo aprendido en soluciones prácticas.
+            </p>
+            <p>
+              Conocimientos en HTML, CSS, JavaScript, PHP, MySQL, y experiencia con React, Bootstrap y Laravel en proyectos formativos. Disfruto del diseño frontend y la lógica backend.
+            </p>
+            <p>
+              Interesado en ciberseguridad; me informo constantemente ya que considero la seguridad digital esencial en el desarrollo actual.
+            </p>
+            <p>
+              Busco crecer como desarrollador, integrarme a proyectos reales y construir un camino profesional con dedicación, curiosidad y responsabilidad.
+            </p>
+          </div>
+          {/* Puedes agregar los enlaces sociales aquí si lo deseas, usando la clase .social-links */}
+        </div>
+      </div>
+    </section>
   );
 }
 
