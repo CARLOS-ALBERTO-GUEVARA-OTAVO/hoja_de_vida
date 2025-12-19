@@ -1,7 +1,7 @@
 import React from 'react';
-import imagenPerfil from '../assets/desarrollador.jpeg';
-import './Sobre_mi.css'; // Usamos el CSS que tiene el estilo de tarjeta
-import ASCIIText from './ASCIIText'; // 1. Importamos el nuevo componente
+import BlurText from './BlurText';
+import './Sobre_mi.css';
+import Lanyard from './Lanyard'; // Importamos el componente del carnet 3D
 
 function About() {
   return (
@@ -9,19 +9,20 @@ function About() {
     <section id="sobre-mi" className="about-section">
       <div className="profile-container">
         <div className="profile-image-wrapper">
-          <img src={imagenPerfil} alt="Foto de perfil de Carlos Guevara" className="profile-pic" />
-          <div className="image-overlay"></div>
+          {/* Contenedor con altura y anchura para que el Canvas 3D sea visible */}
+          <div style={{ height: '400px', width: '300px', position: 'relative' }}>
+            <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+          </div>
         </div>
         <div className="profile-info">
           {/* 2. Creamos un contenedor para el efecto y lo llamamos */}
-          <div style={{ position: 'relative', height: '100px', marginBottom: '0.75rem' }}>
-            <ASCIIText 
-              text="Carlos Guevara"
-              textFontSize={150}
-              asciiFontSize={4}       /* Reducimos aún más para mayor definición */
-              textColor="var(--darker)" /* Mantenemos el color de alto contraste */
-            />
-          </div>
+          <BlurText
+            text="Carlos Guevara"
+            delay={150}
+            animateBy="words"
+            direction="top"
+            className="text-4xl font-bold mb-4 justify-center"
+          />
           <p className="title">Desarrollador en Formación</p>
           <div className="divider"></div>
           <div className="info-section">
