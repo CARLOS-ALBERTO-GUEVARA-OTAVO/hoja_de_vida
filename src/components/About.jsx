@@ -1,19 +1,13 @@
 import React from 'react';
 import BlurText from './BlurText';
 import './Sobre_mi.css';
-import Lanyard from './Lanyard'; // Importamos el componente del carnet 3D
 
 function About() {
   return (
     // Usamos la estructura que coincide con Sobre_mi.css
-    <section id="sobre-mi" className="about-section">
+    <section id="sobre-mi" className="about-section" style={{ position: 'relative', overflow: 'hidden' }}>
       <div className="profile-container">
-        <div className="profile-image-wrapper">
-          {/* Contenedor con altura y anchura para que el Canvas 3D sea visible */}
-          <div style={{ height: '400px', width: '300px', position: 'relative' }}>
-            <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
-          </div>
-        </div>
+        {/* Eliminamos el wrapper de la imagen antigua para que el texto ocupe el espacio o se centre */}
         <div className="profile-info">
           {/* 2. Creamos un contenedor para el efecto y lo llamamos */}
           <BlurText

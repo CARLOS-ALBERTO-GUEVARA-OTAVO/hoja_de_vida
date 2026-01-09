@@ -2,7 +2,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { useGLTF, useTexture, Environment, Lightformer, Html } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
@@ -10,14 +10,14 @@ import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 // Asegúrate de tener los archivos 'card.glb' y 'lanyard.png' en la carpeta 'src/assets/'.
 import cardGLB from '../assets/card.glb';
 import lanyardTextureFile from '../assets/lanyard.png';
-import profileImage from '../assets/desarrollador.jpeg'; // Usamos tu foto de perfil
+import cardImage from '../assets/desarrollador.png';
 
 import * as THREE from 'three';
 import './Lanyard.css';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
-export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], fov = 20, transparent = true }) {
+export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], fov = 15, transparent = true }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
   useEffect(() => {
@@ -33,6 +33,8 @@ export default function Lanyard({ position = [0, 0, 30], gravity = [0, -40, 0], 
         dpr={[1, isMobile ? 1.5 : 2]}
         gl={{ alpha: transparent }}
         onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+        eventSource={document.body}
+        eventPrefix="client"
       >
         <ambientLight intensity={Math.PI} />
         <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
@@ -86,8 +88,24 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
     dir = new THREE.Vector3();
   const segmentProps = { type: 'dynamic', canSleep: true, colliders: false, angularDamping: 4, linearDamping: 4 };
   const { nodes, materials } = useGLTF(cardGLB);
+  
+  // --- Búsqueda de Nodos ---
+  // Intentamos encontrar el nodo por nombre. Si no existe, usamos el PRIMER nodo que tenga geometría (fallback).
+  // Esto asegura que se vea algo aunque el nombre sea diferente (ej. "Mesh_0").
+  const cardNode = nodes.card || nodes.Card || nodes.Cube || nodes.Plane || Object.values(nodes).find((n) => n.geometry);
+  
+  const clipNode = nodes.clip || nodes.Clip;
+  const clampNode = nodes.clamp || nodes.Clamp;
+
+  useEffect(() => {
+    if (!cardNode) {
+      console.warn("⚠️ ERROR CRÍTICO: No se encontró NINGUNA geometría en el archivo .glb. Nodos disponibles:", Object.keys(nodes));
+    } else {
+      console.log("✅ Carnet cargado correctamente usando el nodo:", cardNode.name);
+    }
+  }, [nodes, cardNode]);
+
   const lanyardTexture = useTexture(lanyardTextureFile);
-  const cardTexture = useTexture(profileImage); // Cargamos tu foto como textura
   const [curve] = useState(
     () =>
       new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
@@ -95,12 +113,12 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
   const [dragged, drag] = useState(false);
   const [hovered, hover] = useState(false);
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 0.5]); // Joint 1 (Más corto)
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 0.5]); // Joint 2 (Más corto)
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 0.5]); // Joint 3 (Más corto)
   useSphericalJoint(j3, card, [
     [0, 0, 0],
-    [0, 1.5, 0]
+    [0, 1.45, 0] // Ajustado al nuevo tamaño del carnet
   ]);
 
   useEffect(() => {
@@ -143,22 +161,24 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
 
   return (
     <>
-      <group position={[0, 4, 0]}>
-        <RigidBody ref={fixed} {...segmentProps} type="fixed" />
-        <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
-          <BallCollider args={[0.1]} />
+      <group position={[isMobile ? 0 : 3, 0, 0]}>
+        {/* Bajamos el punto fijo a y=3 para que salga de la parte de abajo del head */}
+        <RigidBody ref={fixed} {...segmentProps} type="fixed" position={[0, 3, 0]} />
+        <RigidBody position={[0.2, 2.5, 0]} ref={j1} {...segmentProps}>
+          <BallCollider args={[0.05]} />
         </RigidBody>
-        <RigidBody position={[1, 0, 0]} ref={j2} {...segmentProps}>
-          <BallCollider args={[0.1]} />
+        <RigidBody position={[0.4, 2.0, 0]} ref={j2} {...segmentProps}>
+          <BallCollider args={[0.05]} />
         </RigidBody>
-        <RigidBody position={[1.5, 0, 0]} ref={j3} {...segmentProps}>
-          <BallCollider args={[0.1]} />
+        <RigidBody position={[0.6, 1.5, 0]} ref={j3} {...segmentProps}>
+          <BallCollider args={[0.05]} />
         </RigidBody>
-        <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
+        <RigidBody position={[0.8, 0.8, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
           <CuboidCollider args={[0.8, 1.125, 0.01]} />
           <group
-            scale={2.25}
-            position={[0, -1.2, -0.05]}
+            scale={1.5}
+            position={[0, 0, -0.05]}
+            rotation={[0, 0, 0]} // Rotación en 0 para que mire al frente
             onPointerOver={() => hover(true)}
             onPointerOut={() => hover(false)}
             onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
@@ -167,18 +187,33 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
             )}
           >
-            <mesh geometry={nodes.card.geometry}>
-              <meshPhysicalMaterial
-                map={cardTexture} // Aplicamos tu foto al carnet
-                map-anisotropy={16}
-                clearcoat={isMobile ? 0 : 1}
-                clearcoatRoughness={0.15}
-                roughness={0.9}
-                metalness={0.8}
-              />
+            <mesh geometry={cardNode?.geometry}>
+              <meshPhysicalMaterial color="#f0f0f0" side={THREE.DoubleSide} roughness={0.5} metalness={0.5} transparent opacity={0} />
             </mesh>
-            <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
-            <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+            
+            {/* Capa HTML con tu foto y nombre pegada al carnet */}
+            <Html
+              transform
+              position={[0, 0.25, 0.05]} // Subimos la foto en Y (0 -> 0.25) para centrarla mejor
+              rotation={[0, 0, 0]}
+              scale={0.005} // Escala corregida: 0.02 era gigante, 0.005 se ajusta al carnet
+              style={{
+                width: '320px', // Ancho ajustado al modelo escalado
+                height: '450px', // Alto ajustado al modelo escalado
+                backgroundColor: 'transparent',
+                borderRadius: '24px',
+                overflow: 'hidden',
+                display: 'flex',
+                flexDirection: 'column',
+                pointerEvents: 'none', // Importante: permite arrastrar el carnet haciendo clic sobre la foto
+                userSelect: 'none'
+              }}
+            >
+              <img src={cardImage} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '24px' }} alt="Carnet" />
+            </Html>
+            
+            <mesh geometry={clipNode?.geometry} material={materials?.metal} material-roughness={0.3} />
+            <mesh geometry={clampNode?.geometry} material={materials?.metal} />
           </group>
         </RigidBody>
       </group>
@@ -191,7 +226,7 @@ function Band({ maxSpeed = 50, minSpeed = 0, isMobile = false }) {
           useMap
           map={lanyardTexture}
           repeat={[-4, 1]}
-          lineWidth={1}
+          lineWidth={0.5}
         />
       </mesh>
     </>

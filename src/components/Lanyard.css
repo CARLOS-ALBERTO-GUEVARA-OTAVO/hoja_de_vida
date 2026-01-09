@@ -8,4 +8,9 @@
   align-items: center;
   transform: scale(1);
   transform-origin: center;
+  pointer-events: none; /* Permite clics a través del contenedor */
+}
+
+.lanyard-wrapper canvas {
+  pointer-events: none; /* Permite que los clics pasen a través del canvas vacío */
 }
