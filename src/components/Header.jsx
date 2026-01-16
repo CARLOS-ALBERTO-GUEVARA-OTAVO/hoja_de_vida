@@ -1,26 +1,44 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-scroll';
-import Lanyard from './Lanyard';
+import LightPillar from './LightPillar';
+import './Header.css';
 
 const Header = () => {
   return (
-    <header className="header">
-      {/* Carnet colgando desde el header */}
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100vh', pointerEvents: 'none', zIndex: 0 }}>
-        <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
-      </div>
+    <>
+      {ReactDOM.createPortal(
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1, pointerEvents: 'none' }}>
+        <LightPillar
+          topColor="#5227FF"
+          bottomColor="#FF9FFC"
+          intensity={1.0}
+          rotationSpeed={2.5}
+          glowAmount={0.005}
+          pillarWidth={3.0}
+          pillarHeight={0.4}
+          noiseIntensity={0.5}
+          pillarRotation={0}
+          interactive={false}
+          mixBlendMode="normal"
+        />
+      </div>,
+      document.body
+      )}
 
-      <div className="logo" style={{ position: 'relative', zIndex: 10 }}>DEV <span>Carlos Alberto Guevara Otavo</span></div>
-      <nav className="nav-links" style={{ position: 'relative', zIndex: 10 }}>
-        <Link to="inicio" smooth={true} duration={200}>Inicio</Link>
-        <Link to="sobre-mi" smooth={true} duration={200}>Sobre mí</Link>
-        <Link to="educacion" smooth={true} duration={200}>Educación</Link>
-        <Link to="experiencia" smooth={true} duration={200}>Experiencia</Link>
-        <Link to="habilidades" smooth={true} duration={200}>Habilidades</Link>
-        <Link to="portafolio" smooth={true} duration={200}>Portafolio</Link>
-        <Link to="contacto" smooth={true} duration={200}>Contacto</Link>
-      </nav>
-    </header>
+      <header className="header">
+        <div className="logo">DEV <span>Carlos Alberto Guevara Otavo</span></div>
+        <nav className="nav-links">
+          <Link to="inicio" smooth={true} duration={500} className="nav-link" spy={true} activeClass="active" offset={-70}>Inicio</Link>
+          <Link to="sobre-mi" smooth={true} duration={500} className="nav-link" spy={true} activeClass="active" offset={-70}>Sobre mí</Link>
+          <Link to="educacion" smooth={true} duration={500} className="nav-link" spy={true} activeClass="active" offset={-70}>Educación</Link>
+          <Link to="experiencia" smooth={true} duration={500} className="nav-link" spy={true} activeClass="active" offset={-70}>Experiencia</Link>
+          <Link to="habilidades" smooth={true} duration={500} className="nav-link" spy={true} activeClass="active" offset={-70}>Habilidades</Link>
+          <Link to="portafolio" smooth={true} duration={500} className="nav-link" spy={true} activeClass="active" offset={-70}>Portafolio</Link>
+          <Link to="contacto" smooth={true} duration={500} className="nav-link" spy={true} activeClass="active" offset={-70}>Contacto</Link>
+        </nav>
+      </header>
+    </>
   );
 };
 

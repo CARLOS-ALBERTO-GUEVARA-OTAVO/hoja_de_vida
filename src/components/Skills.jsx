@@ -1,4 +1,5 @@
 import React from 'react';
+import ElectricBorder from './ElectricBorder';
 import './Sobre_mi.css'; // Importamos los estilos de la tarjeta
 
 const Skills = () => {
@@ -18,7 +19,8 @@ const Skills = () => {
 
   return (
     <section id="habilidades" className="about-section">
-      <div className="profile-container">
+      <ElectricBorder color="#00F0FF" style={{ maxWidth: '1200px', margin: '0 auto' }} borderRadius={20}>
+        <div className="profile-container" style={{ margin: 0, backgroundColor: 'rgba(0, 240, 255, 0.03)' }}>
         <div className="profile-info" style={{ textAlign: 'center' }}>
           <h1>Habilidades</h1>
           <div className="divider" style={{ margin: '2rem auto' }}></div>
@@ -42,7 +44,8 @@ const Skills = () => {
             </div>
           </div>
         </div>
-      </div>
+        </div>
+      </ElectricBorder>
     </section>
   );
 };

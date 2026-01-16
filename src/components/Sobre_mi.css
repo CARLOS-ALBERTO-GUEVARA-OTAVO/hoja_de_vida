@@ -13,7 +13,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 4rem;
-  background: var(--lighter);
+  background: rgba(10, 15, 30, 0.85); /* Fondo oscuro tecnológico */
   border-radius: 20px;
   box-shadow: 0 25px 50px var(--shadow-primary);
   position: relative;
@@ -28,7 +28,7 @@
   left: 0;
   width: 100%;
   height: 8px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+  background: linear-gradient(90deg, #00F0FF, #0055FF); /* Gradiente Cian-Azul */
 }
 
 .profile-image-wrapper {
@@ -96,13 +96,13 @@
 .profile-info h1 {
   font-size: 2.75rem;
   margin-bottom: 0.75rem;
-  color: var(--darker);
+  color: #ffffff; /* Texto blanco */
   letter-spacing: -0.5px;
 }
 
 .profile-info .title {
   font-size: 1.35rem;
-  color: var(--primary);
+  color: #00F0FF; /* Título Cian */
   margin-bottom: 1.75rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -117,7 +117,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, var(--primary), var(--accent));
+  background: linear-gradient(90deg, #00F0FF, #0055FF);
   transition: transform 0.3s ease;
 }
 
@@ -128,7 +128,7 @@
 .divider {
   width: 60px;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  background: linear-gradient(90deg, #00F0FF, #0055FF);
   margin: 2rem 0;
   border-radius: 2px;
   position: relative;
@@ -141,7 +141,7 @@
   left: 0;
   width: 100%;
   height: 4px;
-  background: var(--accent);
+  background: #00F0FF;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -155,18 +155,18 @@
   align-items: center;
   gap: 1rem;
   margin: 1.25rem 0;
-  color: var(--gray);
+  color: #e0e0e0; /* Texto gris claro */
   font-size: 1.05rem;
   transition: color 0.3s ease;
 }
 
 .info-section p:hover {
-  color: var(--primary);
+  color: #00F0FF;
 }
 
 .info-section i {
   font-size: 1.25rem;
-  color: var(--primary);
+  color: #00F0FF;
   width: 24px;
   text-align: center;
   transition: transform 0.3s ease;
@@ -189,8 +189,8 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--lighter);
-  color: var(--primary);
+  background: rgba(255, 255, 255, 0.05);
+  color: #00F0FF;
   font-size: 1.35rem;
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 8px 20px var(--shadow-primary);
@@ -206,7 +206,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, #00F0FF, #0055FF);
   transition: left 0.4s ease;
 }
 
@@ -215,7 +215,101 @@
 }
 
 .social-links a:hover {
-  color: var(--lighter);
+  color: #ffffff;
   transform: translateY(-5px) scale(1.1);
   box-shadow: 0 15px 30px var(--shadow-primary);
+}
+
+/* Estilos para Subcuadros (Tarjetas) */
+.skill-card, .project-card, .education-item, .experience-item {
+  background: transparent;
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.skill-card:hover, .project-card:hover, .education-item:hover, .experience-item:hover {
+  border-color: #00F0FF;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+  transform: translateY(-5px);
+  background: transparent;
+}
+
+.skill-card h4, .project-card h3, .education-item h3, .experience-item h3 {
+  color: #00F0FF;
+  margin-top: 0;
+}
+
+/* --- Estilos para Línea de Tiempo (Timeline) --- */
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 19px;
+  width: 2px;
+  background: rgba(0, 240, 255, 0.2);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2.5rem;
+  padding-left: 50px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 12px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0a0f1e;
+  border: 2px solid #00F0FF;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+  z-index: 1;
+}
+
+.timeline-date {
+  color: #00F0FF;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* --- Botón Tecnológico --- */
+.btn-tech {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: transparent;
+  color: #00F0FF;
+  border: 1px solid #00F0FF;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-tech:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+  transform: translateY(-2px);
+  color: #fff;
 }

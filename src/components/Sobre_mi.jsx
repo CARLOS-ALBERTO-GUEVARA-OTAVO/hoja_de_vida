@@ -1,47 +1,21 @@
 import React from 'react';
+import ElectricBorder from './ElectricBorder';
+import './Sobre_mi.css';
 
 const Sobre_mi = () => {
   return (
-    <section id="sobre-mi" className="section">
-      <h2 className="section-title">Sobre mí</h2>
-      <div className="about-container">
-        <div className="profile-container">
-          <div className="profile-image-wrapper">
-            
-          
-          </div>
-          <div className="profile-info">
-            <h1>Carlos Alberto Guevara Otavo</h1> {/* Nombre opcional, ajústalo */}
-            <div className="title">Desarrollador en Formación</div>
-            <div className="divider" />
-            <div className="info-section">
-              <p>
-                <i className="fas fa-heart" /> Apasionado por el desarrollo web y en formación como Tecnólogo en Análisis y Desarrollo de Software en el SENA. Me motiva aprender constantemente y aplicar lo aprendido en soluciones prácticas.
-              </p>
-              <p>
-                <i className="fas fa-code" /> Conocimientos en HTML, CSS, JavaScript, PHP, MySQL, y experiencia con React, Bootstrap y Laravel en proyectos formativos. Disfruto del diseño frontend y la lógica backend.
-              </p>
-              <p>
-                <i className="fas fa-shield-alt" /> Interesado en ciberseguridad; me informo constantemente ya que considero la seguridad digital esencial en el desarrollo actual.
-              </p>
-              <p>
-                <i className="fas fa-rocket" /> Busco crecer como desarrollador, integrarme a proyectos reales y construir un camino profesional con dedicación, curiosidad y responsabilidad.
-              </p>
-            </div>
-            <div className="social-links">
-              <a href="https://github.com/tu-usuario" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-github" />
-              </a>
-              <a href="https://linkedin.com/in/tu-usuario" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-linkedin" />
-              </a>
-              <a href="https://twitter.com/tu-usuario" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter" />
-              </a>
-            </div>
+    <section id="sobre-mi" className="about-section" style={{ position: 'relative', overflow: 'hidden' }}>
+      <ElectricBorder color="#00F0FF" style={{ maxWidth: '1200px', margin: '0 auto' }} borderRadius={20}>
+        <div className="profile-container" style={{ margin: 0, backgroundColor: 'rgba(0, 240, 255, 0.03)' }}>
+        <div className="profile-info">
+          <h1>Sobre mí</h1>
+          <div className="divider"></div>
+          <div className="info-section">
+            <p>Más información sobre mi trayectoria...</p>
           </div>
         </div>
-      </div>
+        </div>
+      </ElectricBorder>
     </section>
   );
 };
